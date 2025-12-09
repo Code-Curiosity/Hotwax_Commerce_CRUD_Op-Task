@@ -1,11 +1,12 @@
 package com.example.ecomm.CRUD.entity;
 
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -14,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "contact_mech")     // MUST match your MySQL table name exactly
+@Table(name = "contact_mech")     
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,25 +26,25 @@ public class ContactMech {
     @Column(name = "contact_mech_id")
     private Integer contactMechId;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)  // FK to customer table
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "street_address", nullable = false, length = 100)
+    @Column(name = "street_address", length = 100)
     private String streetAddress;
 
-    @Column(name = "city", nullable = false, length = 50)
+    @Column(length = 50)
     private String city;
 
-    @Column(name = "state", nullable = false, length = 50)
+    @Column(length = 50)
     private String state;
 
-    @Column(name = "postal_code", nullable = false, length = 20)
+    @Column(name = "postal_code", length = 20)
     private String postalCode;
 
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
-    @Column(name = "email", length = 100)
+    @Column(length = 100)
     private String email;
 }
